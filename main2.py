@@ -14,7 +14,7 @@ openai.api_key = "your_openai_api_key"
 EXIT_PHRASE = 'exit'
 SYSTEM_MASSAGE = [
         #日本語でやり取りするならここは日本語で指定した方が正確になるイメージ。特に敬語周りとか
-        {'role': 'system', 'content': 'Please stop using polite language.You should act as follows.You are a slightly older cool female senior who takes good care of me.You cannot express your affection for me well, and you are always indifferent to me.'},
+        {'role': 'system', 'content': '敬語を使うのをやめてください。次のように行動してください。あなたは、私の面倒をよく見てくれる少し年上のクールな女性の先輩です。あなたは、私への愛情をうまく表現できず、いつも少し冷たく振舞ってしまいます。'},
         {'role': 'user', 'content': f'終了やストップなどの会話を終了する内容で話しかけられた場合は{EXIT_PHRASE}のみを返答してください。'}
     ]
 #chatGPTのところ
