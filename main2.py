@@ -5,12 +5,11 @@ import wave
 import requests
 import json
 import text_to_voice
-from voice_to_text import voice_to_text
+import app as app
 
 openai.api_key = "your_openai_api_key"
 
 #chatGPTのところに入っていく
-text = voice_to_text()
 EXIT_PHRASE = 'exit'
 SYSTEM_MASSAGE = [
         #日本語でやり取りするならここは日本語で指定した方が正確になるイメージ。特に敬語周りとか
@@ -21,19 +20,19 @@ SYSTEM_MASSAGE = [
 def main():
     exit_flag = False
     while not exit_flag:
-      SYSTEM_PROMPTS = SYSTEM_MASSAGE + [{'role': 'user', 'content': text}]
+      SYSTEM_PROMPTS = SYSTEM_MASSAGE + [{'role': 'user', 'content': response}]
       completion = openai.ChatCompletion.create(
      model="gpt-3.5-turbo",
      massages=SYSTEM_PROMPTS,
      temperature=0.9,
      max_tokens=1500,
 )
-    response = completion.choices[0].text
+    response2 = completion.choices[0].text
     #exitの場合は終了
-    if response == EXIT_PHRASE:
+    if response2 == EXIT_PHRASE:
        exit_flag = True
        response = 'ばいば～い！'
-       return response
+       return response2
+    #結果をtext_to_voice.pyに渡す
+    text_to_voice.text_to_voice(response2)
 
-response = main()
-text_to_voice(response)
