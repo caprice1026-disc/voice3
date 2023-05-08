@@ -8,8 +8,8 @@ import main2 as main
 import app
 import main2 as main
 
-response2 = main.main()
 def post_audio_query(text: str) -> dict:
+ response2 = main.main()
  params = {'text': response2, 'speaker': 1}
  res = requests.post('http://localhost:50021/audio_query', json=params)
  return res.json()

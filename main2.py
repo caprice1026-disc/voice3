@@ -6,6 +6,7 @@ import requests
 import json
 import text_to_voice
 import app as app
+from app import process_text as process_text
 
 openai.api_key = "your_openai_api_key"
 
@@ -20,7 +21,8 @@ SYSTEM_MASSAGE = [
 def main():
     exit_flag = False
     while not exit_flag:
-      SYSTEM_PROMPTS = SYSTEM_MASSAGE + [{'role': 'user', 'content': response}]
+      respnse = process_text(respnse)
+      SYSTEM_PROMPTS = SYSTEM_MASSAGE + [{'role': 'user', 'content': respnse}]
       completion = openai.ChatCompletion.create(
      model="gpt-3.5-turbo",
      massages=SYSTEM_PROMPTS,
@@ -31,8 +33,6 @@ def main():
     #exitの場合は終了
     if response2 == EXIT_PHRASE:
        exit_flag = True
-       response = 'ばいば～い！'
+       response2 = 'ばいば～い！'
        return response2
-    #結果をtext_to_voice.pyに渡す
-    text_to_voice.text_to_voice(response2)
 

@@ -10,13 +10,21 @@ recognition.onresult = ({ results }) => {
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.send(`text=${text}`);
 };
-"始まった時の処理について"
-const start = document.querySelector(".start");
-start.addEventListener("click", () => {
+
+const recordButton = document.querySelector("#record-button");
+const stopButton = document.querySelector("#stop-button");
+
+function startRecording() {
   recognition.start();
-});
-"終わった時の処理について"
-const stop = document.querySelector(".stop");
-stop.addEventListener("click", () => {
+  recordButton.disabled = true;
+  stopButton.disabled = false;
+}
+
+function stopRecording() {
   recognition.stop();
-});
+  recordButton.disabled = false;
+  stopButton.disabled = true;
+}
+
+recordButton.addEventListener("click", startRecording);
+stopButton.addEventListener("click", stopRecording);
